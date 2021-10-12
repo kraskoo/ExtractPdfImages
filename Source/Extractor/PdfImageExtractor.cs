@@ -4,7 +4,6 @@
     using iTextSharp.text.pdf.parser;
     using System.Collections.Generic;
     using System.Drawing;
-    using System.Linq;
 
     public static class PdfImageExtractor
     {
@@ -19,13 +18,10 @@
                     var listener = new ImageRenderListener();
                     parser.ProcessContent(i, listener);
                     var index = 1;
-                    if (listener.Images.Count > 0)
+                    foreach (var pair in listener.Images)
                     {
-                        foreach (var pair in listener.Images)
-                        {
-                            images.Add($"{filename.Split('.').Last()}_Page_{i:D4}_Image_{index:D4}{pair.Value}", pair.Key);
-                            index++;
-                        }
+                        images.Add($"{i:D4}_Image_{index:D4}{pair.Value}", pair.Key);
+                        index++;
                     }
                 }
 

@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Linq;
 
     public class EntryPoint
     {
@@ -26,9 +25,9 @@
                 }
 
                 var images = PdfImageExtractor.ExtractImages(filename);
-                foreach (var name in images.Keys)
+                foreach (var kvp in images)
                 {
-                    images[name].Save(Path.Combine(pdfFileNewDirectory, name));
+                    images[kvp.Key].Save(Path.Combine(pdfFileNewDirectory, kvp.Key));
                 }
             }
         }
