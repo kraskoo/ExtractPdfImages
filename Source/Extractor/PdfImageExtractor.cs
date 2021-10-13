@@ -2,6 +2,7 @@
 {
     using iTextSharp.text.pdf;
     using iTextSharp.text.pdf.parser;
+    using System;
     using System.Collections.Generic;
     using System.Drawing;
 
@@ -16,7 +17,15 @@
                 {
                     var parser = new PdfReaderContentParser(reader);
                     var listener = new ImageRenderListener();
-                    parser.ProcessContent(i, listener);
+                    try
+                    {
+                        parser.ProcessContent(i, listener);
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+
                     var index = 1;
                     foreach (var pair in listener.Images)
                     {
