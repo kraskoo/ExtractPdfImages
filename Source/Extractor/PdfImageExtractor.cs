@@ -17,15 +17,7 @@
                 {
                     var parser = new PdfReaderContentParser(reader);
                     var listener = new ImageRenderListener();
-                    try
-                    {
-                        parser.ProcessContent(i, listener);
-                    }
-                    catch (Exception)
-                    {
-                        continue;
-                    }
-
+                    parser.ProcessContent(i, listener);
                     var index = 1;
                     foreach (var pair in listener.Images)
                     {

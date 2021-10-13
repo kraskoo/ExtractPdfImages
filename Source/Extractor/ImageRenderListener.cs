@@ -21,11 +21,10 @@
 
         public void RenderImage(ImageRenderInfo renderInfo)
         {
-            PdfImageObject image = renderInfo.GetImage();
-            PdfName filter = (PdfName)image.Get(PdfName.FILTER);
-            if (filter != null)
+            var image = renderInfo.GetImage();
+            if (image.Get(PdfName.FILTER) is PdfName filter)
             {
-                Image drawingImage = image.GetDrawingImage();
+                var drawingImage = image.GetDrawingImage();
                 string extension = ".";
                 if (filter == PdfName.DCTDECODE)
                 {
